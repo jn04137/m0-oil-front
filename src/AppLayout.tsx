@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router'
+
 export const AppLayout = ({children}: {
     children: any
 }) => {
@@ -19,7 +21,7 @@ const Navbar = () => {
             </div>
             <div className="flex space-x-5">
                 <div>Home</div>
-                <div>My Garage</div>
+				<div><Link to="/garage">My Garage</Link></div>
                 <div>About</div>
             </div>
         </div>

@@ -19,7 +19,7 @@ function RouteComponent() {
 function Content() {
     const [car, setCar] = useState<ICar>()
     async function getCarData(carId: string) {
-        const url = `http://${import.meta.env.VITE_SERVER_ADDR}/car/garage/mycars/${carId}`
+        const url = `${import.meta.env.VITE_SERVER_ADDR}/car/garage/mycars/${carId}`
         try {
             const req = await fetch(url)
             const car:ICar = await req.json()
