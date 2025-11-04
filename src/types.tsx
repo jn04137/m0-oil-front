@@ -8,3 +8,7 @@ export type ICar = {
     vin: string;
 }
 
+export type ICarMake = {
+    id: number;
+    make: string;
+}

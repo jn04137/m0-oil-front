@@ -45,7 +45,7 @@ function Content() {
                     <h2 className="text-2xl items-center">{car?.year}</h2>
                 </div>
             </div>
-            <div className="pt-4 space-y-2">
+            <div className="py-4 space-y-2">
                 <h1 className="text-2xl italic">Maintenance</h1>
                 <MaintenanceCard />
                 <MaintenanceCard />

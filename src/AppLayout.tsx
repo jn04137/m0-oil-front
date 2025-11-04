@@ -20,9 +20,9 @@ const Navbar = () => {
                 <h1 className="text-xl font-bold">v0_oil</h1>
             </div>
             <div className="flex space-x-5">
-                <div>Home</div>
+                <div><Link to="/">Home</Link></div>
 				<div><Link to="/garage">My Garage</Link></div>
-                <div>About</div>
+                <div><Link to="/about">About</Link></div>
             </div>
         </div>
     )

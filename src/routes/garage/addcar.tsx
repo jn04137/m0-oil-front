@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { AppLayout } from '../../AppLayout'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import type { ICarMake } from '../../types'
 
 export const Route = createFileRoute('/garage/addcar')({
   component: RouteComponent,
@@ -16,13 +17,16 @@ function RouteComponent() {
 
 const inputStyle = "bg-white/5 p-2 rounded"
 
-
 function Content() {
+    const [isLoading, setIsLoading] = useState(true)
+
 	const [make, setMake] = useState("")
 	const [model, setModel] = useState("")
 	const [trim, setTrim] = useState("")
 	const [year, setYear] = useState(0)
 	const [vin, setVIN] = useState("")
+
+    const [carMakes, setCarMakes] = useState<ICarMake[]>([])
 	const nav = useNavigate({from: "/garage"})
 
 	async function submitCar(e: React.SyntheticEvent, make: string, 
@@ -49,18 +53,44 @@ function Content() {
 			console.error(err)
 		}
 	}
+    
+    async function getCarMakes() {
+        try {
+            const url = `${import.meta.env.VITE_SERVER_ADDR}/car/listOfMakes`
+            const res = await fetch(url, {
+                method: 'GET'
+            })
+            const data = await res.json()
+            setCarMakes(data)
+            setIsLoading(false)
+        } catch(err) {
+            console.error(err)
+        }
+    }
+ 
+    useEffect(() => {
+        getCarMakes()
+    }, [])
+
+    console.log("Car makes: ", carMakes)
+    if(isLoading) {
+        return <div>Loading...</div>
+    }
 
 	return(
 		<form className="space-y-3 w-full">
 			<h1 className='text-2xl font-bold'>Add Car</h1>
 			<div className="flex flex-col">
-				<label htmlFor='brand'>Brand</label>
-				<input 
+				<label htmlFor='make'>Make</label>
+				<select 
 					className={inputStyle} 
-					type="text" 
-					name="brand"
+					name="make"
 					onChange={e => setMake(e.target.value)}
-				/>
+				>
+                    {carMakes.map((car: ICarMake) => {
+                        return <option key={car.id} value={car.id}>{car.make}</option>
+                    })}
+                </select>
 			</div>
 			<div className="flex flex-col">
 				<label htmlFor='model'>Model</label>
@@ -107,3 +137,4 @@ function Content() {
 		</form>
 	)
 }
+
