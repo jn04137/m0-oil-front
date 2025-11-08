@@ -12,3 +12,8 @@ export type ICarMake = {
     id: number;
     make: string;
 }
+
+export type ICarModel = {
+	id: number;
+	model: string;
+}
