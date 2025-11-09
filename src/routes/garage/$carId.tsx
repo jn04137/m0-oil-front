@@ -1,7 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { AppLayout } from '../../AppLayout'
-import { useEffect, useState } from 'react'
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { AppLayout } from '../../AppLayout';
+import { useEffect, useState } from 'react';
 import type { ICar } from '../../types';
+
+import { Route as addMaintenancePage } from "./AddMaintenance";
 
 export const Route = createFileRoute('/garage/$carId')({
   component: RouteComponent,
@@ -47,6 +49,7 @@ function Content() {
             </div>
             <div className="py-4 space-y-2">
                 <h1 className="text-2xl italic">Maintenance</h1>
+				<AddMaintenance />
                 <MaintenanceCard />
                 <MaintenanceCard />
                 <MaintenanceCard />
@@ -71,3 +74,17 @@ function MaintenanceCard() {
         </div>
     )
 }
+
+function AddMaintenance() {
+	return(
+		<div>
+			<Link to={addMaintenancePage.to}>
+				<div className="flex justify-center text-3xl bg-white/5 rounded p-5">
+					+
+				</div>
+			</Link>
+		</div>
+	)
+}
+
+
