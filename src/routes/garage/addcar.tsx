@@ -90,7 +90,7 @@ function Content() {
 					onChange={e => setMake(e.target.value)}
 				>
                     {carMakes.map((car: ICarMake) => {
-                        return <option key={car.id} value={car.make}>{car.make}</option>
+                        return <option className='w-full' key={car.id} value={car.make}>{car.make}</option>
                     })}
                 </select>
 			</div>
