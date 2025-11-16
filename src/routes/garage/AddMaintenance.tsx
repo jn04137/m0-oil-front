@@ -6,6 +6,11 @@ export const Route = createFileRoute('/garage/AddMaintenance')({
   component: RouteComponent,
 });
 
+type MaintenanceItem = {
+    maintenance: string,
+    maintenance_type: string
+}
+
 function RouteComponent() {
   return(
 	  <AppLayout>
@@ -18,9 +23,20 @@ function submitForm(e: React.SyntheticEvent) {
 	e.preventDefault()
 }
 
+
 function MaintenanceForm() {
 	const inputStyle = "bg-white/5 p-2 rounded"
-	const [maintenanceItems, setMaintenanceItems] = useState<[]>()
+	const [maintenanceItems, setMaintenanceItems] = useState<MaintenanceItem[]>([])
+    const [maintenanceItemOptions, setMaintenanceItemOptions] = useState<MaintenanceItem[]>([])
+
+    const addMaintenanceItem = (newItem: MaintenanceItem) => {
+        setMaintenanceItems([...maintenanceItems, newItem])
+    }
+
+    const removeMaintenanceItem = (removeIndex: number) => {
+        const updateMaintenanceItemsList = maintenanceItems.filter((_, index) => index !== removeIndex)
+        setMaintenanceItems(updateMaintenanceItemsList)
+    }
 
 	return(
 		<form className="space-y-3 w-full">
@@ -49,4 +65,13 @@ function MaintenanceForm() {
 			</div>
 		</form>
 	)
+}
+
+function MaintenanceItemCard(maintenanceItem: MaintenanceItem) {
+    return(
+        <div>
+            <h1>{maintenanceItem.maintenance}</h1>
+            <h2>{maintenanceItem.maintenance_type}</h2>
+        </div>
+    )
 }

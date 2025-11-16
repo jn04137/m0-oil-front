@@ -31,7 +31,7 @@ function RouteComponent() {
             <div className="w-full space-y-3">
                 <h1 className="text-3xl">My Garage</h1>
                 <div className="space-y-4">
-                    { cars.map((car: ICar, index: number) => {
+                    { cars !== null && cars.map((car: ICar, index: number) => {
                         return <CarCard key={index} car={car} />
                     }) }
 					<AddCar />
